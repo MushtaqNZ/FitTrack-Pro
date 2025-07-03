@@ -1,0 +1,75 @@
+<resources>
+    <string name="app_name">FitTrack Pro</string>
+    <string name="title_home">Home</string>
+    <string name="title_workout">Workout</string>
+    <string name="title_progress">Progress</string>
+    <string name="title_profile">Profile</string>
+    
+    <!-- Home Fragment -->
+    <string name="welcome_message">Welcome to FitTrack Pro!</string>
+    <string name="quick_start">Quick Start</string>
+    <string name="recent_workouts">Recent Workouts</string>
+    <string name="no_workouts_yet">No workouts yet. Start your fitness journey!</string>
+    
+    <!-- Workout Fragment -->
+    <string name="workout_templates">Workout Templates</string>
+    <string name="log_workout">Log Workout</string>
+    <string name="exercise_library">Exercise Library</string>
+    <string name="select_template">Select Template</string>
+    <string name="start_workout">Start Workout</string>
+    <string name="workout_duration">Duration (minutes)</string>
+    <string name="workout_notes">Notes</string>
+    <string name="save_workout">Save Workout</string>
+    
+    <!-- Progress Fragment -->
+    <string name="progress_overview">Progress Overview</string>
+    <string name="total_workouts">Total Workouts</string>
+    <string name="total_duration">Total Duration</string>
+    <string name="average_duration">Average Duration</string>
+    <string name="current_streak">Current Streak</string>
+    <string name="achievements">Achievements</string>
+    <string name="weekly_workouts">This Week</string>
+    <string name="monthly_workouts">This Month</string>
+    
+    <!-- Profile Fragment -->
+    <string name="user_profile">User Profile</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="fitness_level">Fitness Level</string>
+    <string name="preferred_workout">Preferred Workout</string>
+    <string name="save_profile">Save Profile</string>
+    <string name="edit_profile">Edit Profile</string>
+    
+    <!-- Exercise Categories -->
+    <string name="chest">Chest</string>
+    <string name="back">Back</string>
+    <string name="legs">Legs</string>
+    <string name="shoulders">Shoulders</string>
+    <string name="arms">Arms</string>
+    <string name="core">Core</string>
+    
+    <!-- Fitness Levels -->
+    <string name="beginner">Beginner</string>
+    <string name="intermediate">Intermediate</string>
+    <string name="advanced">Advanced</string>
+    
+    <!-- Workout Types -->
+    <string name="strength">Strength</string>
+    <string name="cardio">Cardio</string>
+    <string name="mixed">Mixed</string>
+    
+    <!-- Equipment -->
+    <string name="bodyweight">Bodyweight</string>
+    <string name="dumbbells">Dumbbells</string>
+    <string name="barbell">Barbell</string>
+    <string name="machine">Machine</string>
+    
+    <!-- Common -->
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="sets">Sets</string>
+    <string name="reps">Reps</string>
+    <string name="weight">Weight (lbs)</string>
+</resources> 
