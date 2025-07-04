@@ -74,12 +74,10 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     }
     
     /**
-     * Get the first user (for MVP, we'll assume single user)
+     * Get the first user (assumes single user for this app)
      */
     fun getFirstUser() {
         viewModelScope.launch {
-            // For MVP, we'll get the first user from the database
-            // In a real app, you'd have proper user authentication
             val users = userDao.getAllUsers()
             users.collect { userList ->
                 if (userList.isNotEmpty()) {

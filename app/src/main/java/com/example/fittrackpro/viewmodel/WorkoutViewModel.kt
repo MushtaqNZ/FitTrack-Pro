@@ -135,7 +135,7 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
                         sessionId = sessionId,
                         exerciseId = exerciseId,
                         sets = sets,
-                        reps = 10, // Default reps for MVP
+                        reps = 10, // Default reps
                         weight = weight
                     )
                     workoutDao.insertWorkoutEntry(entry)

@@ -65,7 +65,6 @@ class HomeFragment : Fragment() {
         
         // Recent workouts recycler view
         binding.recyclerRecentWorkouts.layoutManager = LinearLayoutManager(context)
-        // TODO: Add adapter for recent workouts
     }
     
     private fun setupObservers() {
@@ -88,7 +87,6 @@ class HomeFragment : Fragment() {
             } else {
                 binding.tvNoWorkouts.visibility = View.GONE
                 binding.recyclerRecentWorkouts.visibility = View.VISIBLE
-                // TODO: Update recycler view with workouts
             }
         }
         
@@ -108,7 +106,6 @@ class HomeFragment : Fragment() {
         userViewModel.checkUserExists()
         userViewModel.isUserCreated.observe(viewLifecycleOwner) { exists ->
             if (!exists) {
-                // Create default user for MVP
                 userViewModel.createUser(
                     name = "Fitness User",
                     email = "user@fittrackpro.com",
