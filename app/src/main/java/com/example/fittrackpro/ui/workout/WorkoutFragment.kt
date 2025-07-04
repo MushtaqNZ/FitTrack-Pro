@@ -63,12 +63,18 @@ class WorkoutFragment : Fragment() {
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerCategory.adapter = categoryAdapter
         
-        binding.spinnerCategory.setOnItemSelectedListener { _, _, position, _ ->
-            when (position) {
-                0 -> workoutViewModel.loadWorkoutTemplates()
-                1 -> workoutViewModel.loadWorkoutTemplatesByCategory("strength")
-                2 -> workoutViewModel.loadWorkoutTemplatesByCategory("cardio")
-                3 -> workoutViewModel.loadWorkoutTemplatesByCategory("mixed")
+        binding.spinnerCategory.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: android.view.View?, position: Int, id: Long) {
+                when (position) {
+                    0 -> workoutViewModel.loadWorkoutTemplates()
+                    1 -> workoutViewModel.loadWorkoutTemplatesByCategory("strength")
+                    2 -> workoutViewModel.loadWorkoutTemplatesByCategory("cardio")
+                    3 -> workoutViewModel.loadWorkoutTemplatesByCategory("mixed")
+                }
+            }
+            
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {
+                // Do nothing
             }
         }
         

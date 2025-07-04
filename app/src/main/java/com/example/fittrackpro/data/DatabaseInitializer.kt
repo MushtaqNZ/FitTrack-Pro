@@ -2,6 +2,7 @@ package com.example.fittrackpro.data
 
 import com.example.fittrackpro.data.entity.Exercise
 import com.example.fittrackpro.data.entity.WorkoutTemplate
+import kotlinx.coroutines.runBlocking
 
 /**
  * Database initializer to populate the database with initial data
@@ -157,13 +158,17 @@ object DatabaseInitializer {
         
         // Insert data into database
         database.workoutDao().let { workoutDao ->
-            workoutTemplates.forEach { template ->
-                workoutDao.insertWorkoutTemplate(template)
+            runBlocking {
+                workoutTemplates.forEach { template ->
+                    workoutDao.insertWorkoutTemplate(template)
+                }
             }
         }
         
         database.exerciseDao().let { exerciseDao ->
-            exerciseDao.insertExercises(exercises)
+            runBlocking {
+                exerciseDao.insertExercises(exercises)
+            }
         }
     }
 } 

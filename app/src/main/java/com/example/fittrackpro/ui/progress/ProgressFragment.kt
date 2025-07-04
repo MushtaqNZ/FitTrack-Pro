@@ -115,18 +115,8 @@ class ProgressFragment : Fragment() {
     
     private fun updateProgressStats(stats: com.example.fittrackpro.viewmodel.ProgressStats) {
         binding.tvTotalWorkouts.text = stats.totalWorkouts.toString()
-        binding.tvTotalDuration.text = "${stats.totalDuration} min"
-        binding.tvAverageDuration.text = "${stats.averageDuration} min"
-        binding.tvWeeklyWorkouts.text = stats.weeklyWorkouts.toString()
-        binding.tvMonthlyWorkouts.text = stats.monthlyWorkouts.toString()
-        
-        // Format last workout date
-        stats.lastWorkoutDate?.let { date ->
-            val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
-            binding.tvLastWorkout.text = dateFormat.format(date)
-        } ?: run {
-            binding.tvLastWorkout.text = "No workouts yet"
-        }
+        // Note: Additional stats views (total duration, average duration, etc.) 
+        // are not included in the current layout for simplicity
     }
     
     private fun updateProgressChart(stats: com.example.fittrackpro.viewmodel.ProgressStats) {

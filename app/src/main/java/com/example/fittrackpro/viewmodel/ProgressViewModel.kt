@@ -6,7 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.fittrackpro.data.FitTrackDatabase
-import com.example.fittrackpro.data.dao.WorkoutSessionWithEntries
+import com.example.fittrackpro.data.model.WorkoutSessionWithEntries
+import com.example.fittrackpro.data.model.WorkoutEntryWithExercise
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Date
@@ -34,19 +35,33 @@ class ProgressViewModel(application: Application) : AndroidViewModel(application
      */
     fun loadProgressStats(userId: Long) {
         viewModelScope.launch {
-            val recentWorkouts = workoutDao.getRecentWorkoutSessionsWithEntries(userId)
-            recentWorkouts.collect { workoutList ->
-                val stats = calculateProgressStats(workoutList)
-                _workoutStats.value = stats
+            val sessions = workoutDao.getRecentWorkoutSessions(userId)
+            val sessionsWithEntries = mutableListOf<WorkoutSessionWithEntries>()
+            
+            for (session in sessions) {
+                val entries = workoutDao.getWorkoutEntriesForSession(session.id)
+                val entriesWithExercise = mutableListOf<WorkoutEntryWithExercise>()
                 
-                // Calculate achievements
-                val userAchievements = calculateAchievements(stats)
-                _achievements.value = userAchievements
+                for (entry in entries) {
+                    val exercise = workoutDao.getExerciseById(entry.exerciseId)
+                    if (exercise != null) {
+                        entriesWithExercise.add(WorkoutEntryWithExercise(entry, exercise))
+                    }
+                }
                 
-                // Calculate current streak
-                val streak = calculateCurrentStreak(workoutList)
-                _currentStreak.value = streak
+                sessionsWithEntries.add(WorkoutSessionWithEntries(session, entriesWithExercise))
             }
+            
+            val stats = calculateProgressStats(sessionsWithEntries)
+            _workoutStats.value = stats
+            
+            // Calculate achievements
+            val userAchievements = calculateAchievements(stats)
+            _achievements.value = userAchievements
+            
+            // Calculate current streak
+            val streak = calculateCurrentStreak(sessionsWithEntries)
+            _currentStreak.value = streak
         }
     }
     

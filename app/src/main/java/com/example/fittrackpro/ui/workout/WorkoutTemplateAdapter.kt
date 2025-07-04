@@ -36,8 +36,8 @@ class WorkoutTemplateAdapter(
         fun bind(template: WorkoutTemplate) {
             binding.tvTemplateName.text = template.name
             binding.tvTemplateDescription.text = template.description
-            binding.tvTemplateCategory.text = template.category.capitalize()
-            binding.tvTemplateDifficulty.text = template.difficultyLevel.capitalize()
+            binding.tvTemplateCategory.text = template.category.replaceFirstChar { it.uppercase() }
+            binding.tvTemplateDifficulty.text = template.difficultyLevel.replaceFirstChar { it.uppercase() }
 
             // Set category color
             val categoryColor = when (template.category) {

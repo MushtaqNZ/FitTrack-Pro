@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fittrackpro.databinding.ItemAchievementBinding
 import com.example.fittrackpro.viewmodel.Achievement
+import com.example.fittrackpro.R
 
 /**
  * Adapter for displaying achievements in a RecyclerView
@@ -42,7 +43,7 @@ class AchievementAdapter : ListAdapter<Achievement, AchievementAdapter.Achieveme
                 "weekly_warrior" -> android.R.drawable.ic_menu_today
                 "monthly_master" -> android.R.drawable.ic_menu_month
                 "time_warrior" -> android.R.drawable.ic_menu_recent_history
-                else -> android.R.drawable.ic_menu_star
+                else -> R.drawable.ic_star
             }
             
             binding.ivAchievementIcon.setImageResource(iconRes)

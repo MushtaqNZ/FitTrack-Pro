@@ -2,6 +2,7 @@ package com.example.fittrackpro.data.dao
 
 import androidx.room.*
 import com.example.fittrackpro.data.entity.*
+import com.example.fittrackpro.data.model.*
 import kotlinx.coroutines.flow.Flow
 import java.util.Date
 
@@ -46,31 +47,12 @@ interface WorkoutDao {
     suspend fun deleteWorkoutEntry(entry: WorkoutEntry)
     
     // Combined queries for workout data
-    @Transaction
     @Query("SELECT * FROM workout_sessions WHERE userId = :userId ORDER BY date DESC LIMIT 30")
-    fun getRecentWorkoutSessionsWithEntries(userId: Long): Flow<List<WorkoutSessionWithEntries>>
-}
-
-/**
- * Data class for workout sessions with their entries
- */
-data class WorkoutSessionWithEntries(
-    @Embedded val session: WorkoutSession,
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "sessionId"
-    )
-    val entries: List<WorkoutEntryWithExercise>
-)
-
-/**
- * Data class for workout entries with exercise details
- */
-data class WorkoutEntryWithExercise(
-    @Embedded val entry: WorkoutEntry,
-    @Relation(
-        parentColumn = "exerciseId",
-        entityColumn = "id"
-    )
-    val exercise: Exercise
-) 
+    suspend fun getRecentWorkoutSessions(userId: Long): List<WorkoutSession>
+    
+    @Query("SELECT * FROM workout_entries WHERE sessionId = :sessionId")
+    suspend fun getWorkoutEntriesForSession(sessionId: Long): List<WorkoutEntry>
+    
+    @Query("SELECT * FROM exercises WHERE id = :exerciseId")
+    suspend fun getExerciseById(exerciseId: Long): Exercise?
+} 

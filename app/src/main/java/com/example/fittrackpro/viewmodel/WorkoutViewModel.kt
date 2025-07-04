@@ -6,11 +6,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.fittrackpro.data.FitTrackDatabase
-import com.example.fittrackpro.data.dao.WorkoutSessionWithEntries
+import com.example.fittrackpro.data.model.WorkoutSessionWithEntries
 import com.example.fittrackpro.data.entity.Exercise
 import com.example.fittrackpro.data.entity.WorkoutEntry
 import com.example.fittrackpro.data.entity.WorkoutSession
 import com.example.fittrackpro.data.entity.WorkoutTemplate
+import com.example.fittrackpro.data.model.WorkoutEntryWithExercise
 import kotlinx.coroutines.launch
 import java.util.Date
 
@@ -85,9 +86,24 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
      */
     fun loadRecentWorkouts(userId: Long) {
         viewModelScope.launch {
-            workoutDao.getRecentWorkoutSessionsWithEntries(userId).collect { workouts ->
-                _recentWorkouts.value = workouts
+            val sessions = workoutDao.getRecentWorkoutSessions(userId)
+            val sessionsWithEntries = mutableListOf<WorkoutSessionWithEntries>()
+            
+            for (session in sessions) {
+                val entries = workoutDao.getWorkoutEntriesForSession(session.id)
+                val entriesWithExercise = mutableListOf<WorkoutEntryWithExercise>()
+                
+                for (entry in entries) {
+                    val exercise = workoutDao.getExerciseById(entry.exerciseId)
+                    if (exercise != null) {
+                        entriesWithExercise.add(WorkoutEntryWithExercise(entry, exercise))
+                    }
+                }
+                
+                sessionsWithEntries.add(WorkoutSessionWithEntries(session, entriesWithExercise))
             }
+            
+            _recentWorkouts.value = sessionsWithEntries
         }
     }
     
@@ -154,21 +170,19 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
         val stats = MutableLiveData<WorkoutStats>()
         
         viewModelScope.launch {
-            val recentWorkouts = workoutDao.getRecentWorkoutSessionsWithEntries(userId)
-            recentWorkouts.collect { workoutList ->
-                val totalWorkouts = workoutList.size
-                val totalDuration = workoutList.sumOf { it.session.duration }
-                val averageDuration = if (totalWorkouts > 0) totalDuration / totalWorkouts else 0
-                
-                val statsData = WorkoutStats(
-                    totalWorkouts = totalWorkouts,
-                    totalDuration = totalDuration,
-                    averageDuration = averageDuration,
-                    lastWorkoutDate = workoutList.firstOrNull()?.session?.date
-                )
-                
-                stats.value = statsData
-            }
+            val sessions = workoutDao.getRecentWorkoutSessions(userId)
+            val totalWorkouts = sessions.size
+            val totalDuration = sessions.sumOf { it.duration }
+            val averageDuration = if (totalWorkouts > 0) totalDuration / totalWorkouts else 0
+            
+            val statsData = WorkoutStats(
+                totalWorkouts = totalWorkouts,
+                totalDuration = totalDuration,
+                averageDuration = averageDuration,
+                lastWorkoutDate = sessions.firstOrNull()?.date
+            )
+            
+            stats.value = statsData
         }
         
         return stats

@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fittrackpro.R
@@ -57,7 +58,8 @@ class HomeFragment : Fragment() {
         // Quick start button
         binding.btnQuickStart.setOnClickListener {
             // Navigate to workout fragment
-            val navController = requireActivity().findNavController(R.id.nav_host_fragment_activity_main)
+            val navHostFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as androidx.navigation.fragment.NavHostFragment
+            val navController = navHostFragment.navController
             navController.navigate(R.id.navigation_workout)
         }
         

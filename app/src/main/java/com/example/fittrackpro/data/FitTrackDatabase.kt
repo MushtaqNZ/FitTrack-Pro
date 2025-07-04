@@ -7,6 +7,7 @@ import com.example.fittrackpro.data.dao.UserDao
 import com.example.fittrackpro.data.dao.WorkoutDao
 import com.example.fittrackpro.data.entity.*
 import java.util.concurrent.Executors
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 /**
  * Main Room database for FitTrack Pro
