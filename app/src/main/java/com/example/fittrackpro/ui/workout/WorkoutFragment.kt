@@ -95,8 +95,12 @@ class WorkoutFragment : Fragment() {
             if (saved) {
                 Toast.makeText(context, "Workout saved successfully!", Toast.LENGTH_SHORT).show()
                 clearWorkoutForm()
+                // Reset the saved status to prevent multiple toasts
+                workoutViewModel.resetWorkoutSavedStatus()
             } else {
                 Toast.makeText(context, "Failed to save workout", Toast.LENGTH_SHORT).show()
+                // Reset the saved status to prevent multiple toasts
+                workoutViewModel.resetWorkoutSavedStatus()
             }
         }
     }

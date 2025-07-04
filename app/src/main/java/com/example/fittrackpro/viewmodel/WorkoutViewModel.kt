@@ -187,6 +187,13 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
         
         return stats
     }
+    
+    /**
+     * Reset the workout saved status to prevent multiple toasts
+     */
+    fun resetWorkoutSavedStatus() {
+        _isWorkoutSaved.value = null
+    }
 }
 
 /**

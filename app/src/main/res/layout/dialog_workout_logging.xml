@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:hint="@string/workout_notes">
+        android:hint="Optional notes about your workout...">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_notes"
@@ -41,8 +41,7 @@
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:minLines="2"
-            android:maxLines="4"
-            android:hint="Optional notes about your workout..." />
+            android:maxLines="4" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
