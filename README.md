@@ -94,9 +94,11 @@ FitTrack Pro is a comprehensive fitness tracking Android application designed to
 
 ## Demo Video
 
-[![FitTrack Pro Demo](https://img.youtube.com/vi/your-video-id/0.jpg)](https://www.youtube.com/watch?v=your-video-id)
+[🎥 Watch Demo Video](https://github.com/MushtaqNZ/FitTrack-Pro/releases/download/v1.0.0/Project.3.Demo.mov)
 
-*Click to watch the demo video showing key features in action*
+*Click to download and watch the demo video showing key features in action*
+
+**Video Size**: ~46MB | **Format**: MOV | **Duration**: Short demo of core functionality
 
 ## Course Topics Implementation
 
